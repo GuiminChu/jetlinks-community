@@ -311,6 +311,13 @@
                 <artifactId>hsweb-easy-orm-elasticsearch</artifactId>
                 <version>${easyorm.version}</version>
             </dependency>
+
+            <!-- lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.18</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -383,7 +390,6 @@
             <optional>true</optional>
         </dependency>
 
-
     </dependencies>
 
     <repositories>
@@ -402,7 +408,6 @@
                 <updatePolicy>always</updatePolicy>
             </snapshots>
         </repository>
-
     </repositories>
 
     <distributionManagement>

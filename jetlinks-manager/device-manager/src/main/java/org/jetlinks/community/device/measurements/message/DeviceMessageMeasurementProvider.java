@@ -1,6 +1,7 @@
 package org.jetlinks.community.device.measurements.message;
 
 import io.micrometer.core.instrument.MeterRegistry;
+import lombok.extern.slf4j.Slf4j;
 import org.jetlinks.core.device.DeviceRegistry;
 import org.jetlinks.core.event.EventBus;
 import org.jetlinks.core.message.DeviceMessage;
@@ -14,6 +15,7 @@ import org.jetlinks.community.timeseries.TimeSeriesManager;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @Component
 public class DeviceMessageMeasurementProvider extends StaticMeasurementProvider {
 
@@ -34,6 +36,7 @@ public class DeviceMessageMeasurementProvider extends StaticMeasurementProvider 
 
     @Subscribe("/device/*/*/message/**")
     public Mono<Void> incrementMessage(DeviceMessage message) {
+        log.info("======> DeviceMessageMeasurementProvider");
         return Mono.fromRunnable(() -> {
             registry
                 .counter("message-count", convertTags(message))

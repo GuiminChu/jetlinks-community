@@ -1,5 +1,5 @@
 server:
-  port: 8848
+  port: 8180
 
 spring:
   profiles:
@@ -15,8 +15,10 @@ spring:
   resources:
     static-locations: file:./static/,/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/, classpath:/public/
   redis:
-    host: 127.0.0.1
+    host: 192.168.0.88
     port: 6379
+    password: 123456
+    database: 3
     lettuce:
       pool:
         max-active: 1024
@@ -24,9 +26,9 @@ spring:
     serializer: jdk # 设置fst时,redis key使用string序列化,value使用 fst序列化.
   #        max-wait: 10s
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/jetlinks
-    username: postgres
-    password: jetlinks
+    url: r2dbc:mysql://192.168.0.88:3306/jetlinks_cgm
+    username: root
+    password: 123456
     pool:
       max-size: 32
   reactor:
@@ -41,11 +43,11 @@ spring:
           socket-timeout: ${elasticsearch.client.socket-timeout}
           connection-timeout: ${elasticsearch.client.socket-timeout}
 easyorm:
-  default-schema: public # 数据库默认的schema
-  dialect: postgres #数据库方言
+  default-schema: jetlinks_cgm # 数据库默认的schema
+  dialect: mysql #数据库方言
 elasticsearch:
   embedded:
-    enabled: false # 为true时使用内嵌的elasticsearch,不建议在生产环境中使用
+    enabled: true # 为true时使用内嵌的elasticsearch,不建议在生产环境中使用
     data-path: ./data/elasticsearch
     port: 9200
     host: 0.0.0.0

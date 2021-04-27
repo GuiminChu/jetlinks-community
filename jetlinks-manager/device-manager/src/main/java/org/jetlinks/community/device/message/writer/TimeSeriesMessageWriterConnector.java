@@ -21,6 +21,7 @@ public class TimeSeriesMessageWriterConnector{
 
     @Subscribe(topics = "/device/**", id = "device-message-ts-writer")
     public Mono<Void> writeDeviceMessageToTs(DeviceMessage message) {
+        log.info("======> TimeSeriesMessageWriterConnector");
         return dataService.saveDeviceMessage(message);
     }
 
